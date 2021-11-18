@@ -1,0 +1,9 @@
+user_name,password,user_type,privilege_level
+dasith,1234,staff,2
+dasith,1234,staff,2
+dasith,1234,STAFF,1
+dasith,1234,S,1
+dasith,81dc9bdb52d04dc20036dbd8313ed055,S,1
+dilu,202cb962ac59075b964b07152d234b70,S,1
+gajaman,289bb86a17c9206f4f69b2db175540c4,S,1
+das,2a6571da26602a67be14ea8c5ab82349,S,1
