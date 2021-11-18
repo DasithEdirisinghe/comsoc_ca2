@@ -18,10 +18,11 @@ class System:
         self.privilege = ""
 
     def welcome(self):
-        print("Welcome to the System\n")
+        print("\nWelcome to the System\n")
         self.userStatus()
 
     def userStatus(self):
+        count = 0
         status = input("Already Registered to the system? [Yes(y)/No(n)]: ").upper()
         if status == "YES" or status == "Y":
             self.logIn()
@@ -35,11 +36,16 @@ class System:
         print("\nLOGIN\n")
         user_name = input("Username: ")
         password = input("Password: ")
-
+        count = 0
         while not self.validateUser(user_name, password):
-
-            user_name = input("Username: ")
-            password = input("Password: ")
+            count += 1
+            if count > 2:
+                print("Too much attempts. Register to the system")
+                self.signUp()
+                break
+            else:
+                user_name = input("Username: ")
+                password = input("Password: ")
         else:
             print("\nSuccessfully logged In")
             self.action()
@@ -60,6 +66,7 @@ class System:
         self.logIn()
 
     def validateUser(self, user_name, password):
+        count = 0
         config = pd.read_csv('../config/configuration.csv')
         for index, con in config.iterrows():
             if con[0] == user_name and con[1] == h.md5(password.encode("utf-8")).hexdigest():
@@ -99,11 +106,13 @@ class System:
         for i in data["result"]:
             if i['name'] == person_name:
                 print(i)
-                break
+                f.close()
+                return True
+
         else:
             print("No record found")
-        # Closing file
-        f.close()
+            f.close()
+            return False
 
     def writeData(self, dic):
         a_file = open('../config/data.json', "r")
@@ -136,12 +145,16 @@ class System:
             self.read()
 
     def read(self):
-        if input("Do you want to see all the patients records? [y/n]: ").upper() == "Y":
-            self.showAll()
+        if self.privilege == 4:
+            print(f"{self.username} personal data")
+            self.show(self.username)
         else:
-            name = input("Enter Patient Name to get details: ")
-            self.show(name)
-        if input("Do you need more actions to made? [Y/N]: ").upper() == "Y":
+            if input("Do you want to see all the patients records? [y/n]: ").upper() == "Y":
+                self.showAll()
+            else:
+                name = input("Enter Patient Name to get details: ")
+                self.show(name)
+        if input("\nDo you need more actions to made? [Y/N]: ").upper() == "Y":
             RW = input("Read or Write? [R/W]: ").upper()
             if RW == "R":
                 self.read()
@@ -164,52 +177,98 @@ class System:
             print("You are allowed to change the patients personal data")
             if input("New Patient or Existing Patient? [New(n)/Existing(E)]: ").upper() == "E":
                 person_name = input("patient name :")
-                self.show(person_name)
+                show = self.show(person_name)
+                if show:
+                    if input("\nDo you want to add/change the personal data? [Y/N]: ").upper() == 'Y':
+                        name = input("name: ")
+                        age = input("age: ")
+                        if name == "":
+                            dic["name"] = person_name
+                        else:
+                            dic["name"] = name
+                        dic["age"] = age
 
-            if input("Do you want to add/change the personal data? [Y/N]: ").upper() == 'Y':
-                name = input("name: ")
-                age = input("age: ")
-                dic["name"] = name
-                dic["age"] = age
+                        dic["updated_by"] = self.username
+                        self.writeData(dic)
+                    else:
+                        print("No record updated")
             else:
-                print("Thank you")
+                if input("\nDo you want to add/change the personal data? [Y/N]: ").upper() == 'Y':
+                    name = input("name: ")
+                    age = input("age: ")
+                    dic["name"] = name
+                    dic["age"] = age
+
+                    dic["updated_by"] = self.username
+                    self.writeData(dic)
+                else:
+                    print("No record updated")
 
         if self.privilege == 3:
-            print("You allowed to change the patients Lab Test Data")
-            if input("New Patient or Existing Patient? [New(n)/Existing(E)]: ").upper() == "E":
-                person_name = input("person_name :")
-                self.show(person_name)
-            if input("Do you want to add/change the lab test data? [Y/N]: ").upper() == 'Y':
-                lab_test_prescription = input("lab test data: ")
-                dic["lab_test_prescription"] = lab_test_prescription
-            else:
-                print("Thank you")
+            print("\nYou allowed to change the patients Lab Test Data\n")
+            person_name = input("person_name :")
+            show = self.show(person_name)
+            if show:
+                if input("Do you want to add/change the lab test data? [Y/N]: ").upper() == 'Y':
+                    lab_test_prescription = input("lab test data: ")
+                    dic["lab_test_prescription"] = lab_test_prescription
+                    dic["name"] = person_name
+                    dic["updated_by"] = self.username
+                    self.writeData(dic)
+                else:
+                    print("No record updated")
 
         if self.privilege == 1:
-            print("You allowed to change the patients all data")
+            print("\nYou allowed to change the patients all data\n")
             if input("New Patient or Existing Patient? [New(n)/Existing(E)]: ").upper() == "E":
                 person_name = input("patient name: ")
-                self.show(person_name)
-            if input("Do you want to add/change the patients data? [Y/N]: ").upper() == 'Y':
-                name = input("name: ")
-                age = input("age: ")
-                sickness_details = input("sickness details: ")
-                drug_prescription = input("Drug prescription: ")
-                lab_test_prescription = input("lab test data: ")
+                show = self.show(person_name)
+                if show:
+                    if input("Do you want to add/change the patients data? [Y/N]: ").upper() == 'Y':
+                        name = input("name: ")
+                        age = input("age: ")
+                        sickness_details = input("sickness details: ")
+                        drug_prescription = input("Drug prescription: ")
+                        lab_test_prescription = input("lab test data: ")
 
-                dic["name"] = name
-                dic["age"] = age
-                dic["sickness_details"] = sickness_details
-                dic["drug_prescription"] = drug_prescription
-                dic["lab_test_prescription"] = lab_test_prescription
+                        if name == "":
+                            dic["name"] = person_name
+                        else:
+                            dic["name"] = name
+                        dic["age"] = age
+                        dic["sickness_details"] = sickness_details
+                        dic["drug_prescription"] = drug_prescription
+                        dic["lab_test_prescription"] = lab_test_prescription
 
+                        dic["updated_by"] = self.username
+                        self.writeData(dic)
+
+                    else:
+                        print("No record updated")
             else:
-                print("Thank you")
+                if input("Do you want to add/change the patients data? [Y/N]: ").upper() == 'Y':
+                    name = input("name: ")
+                    age = input("age: ")
+                    sickness_details = input("sickness details: ")
+                    drug_prescription = input("Drug prescription: ")
+                    lab_test_prescription = input("lab test data: ")
 
-        dic["updated_by"] = self.username
-        self.writeData(dic)
+                    dic["name"] = name
+                    dic["age"] = age
+                    dic["sickness_details"] = sickness_details
+                    dic["drug_prescription"] = drug_prescription
+                    dic["lab_test_prescription"] = lab_test_prescription
 
-        if input("Do you need more actions to made? [Y/N]: ").upper() == "Y":
+                    dic["updated_by"] = self.username
+                    self.writeData(dic)
+
+                else:
+                    print("No record updated")
+
+        if self.privilege == 4:
+            print("Sorry you are not authorized to update the data")
+
+        if input("\nDo you need more actions to made? [Y/N]: ").upper() == "Y":
             RW = input("Read or Write? [R/W]: ").upper()
             if RW == "R":
                 self.read()

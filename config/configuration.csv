@@ -1,9 +1,8 @@
 user_name,password,user_type,privilege_level
-dasith,1234,staff,2
-dasith,1234,staff,2
-dasith,1234,STAFF,1
-dasith,1234,S,1
-dasith,81dc9bdb52d04dc20036dbd8313ed055,S,1
-dilu,202cb962ac59075b964b07152d234b70,S,1
-gajaman,289bb86a17c9206f4f69b2db175540c4,S,1
-das,2a6571da26602a67be14ea8c5ab82349,S,1
+das,2a6571da26602a67be14ea8c5ab82349,P,4
+ds,522748524ad010358705b6852b81be4c,P,4
+dasith,9b5ed6941fe51c3b36c97bd8b826d5f8,S,1
+amal,16b5480e7b6e68607fe48815d16b5d6d,P,4
+nurse,0701aa317da5a004fbf6111545678a6c,S,2
+lab,f9664ea1803311b35f81d07d8c9e072d,S,3
+patient4,9bac701f330431c4de52e835b8ebf661,P,4
