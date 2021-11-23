@@ -1,1 +1,13 @@
-{"result": [{"name": "", "age": "", "sickness_details": "", "drug_prescription": "day and night", "lab_test_prescription": "good", "updated_by": "dasith"}, {"name": "patient1", "age": "45", "sickness_details": "heart problem", "drug_prescription": "idk", "lab_test_prescription": "okay", "updated_by": "dasith"}, {"name": "patient2", "age": "63", "sickness_details": "", "drug_prescription": "", "lab_test_prescription": "", "updated_by": "nurse"}, {"name": "patient3", "age": "46", "sickness_details": "", "drug_prescription": "", "lab_test_prescription": "", "updated_by": "nurse"}, {"name": "patient4", "age": "56", "sickness_details": "not covid", "drug_prescription": "", "lab_test_prescription": "pass", "updated_by": "nurse"}, {"name": "patient5", "age": "49", "sickness_details": "", "drug_prescription": "", "lab_test_prescription": "", "updated_by": "nurse"}, {"name": "patient6", "age": "45", "sickness_details": "not covid-19", "drug_prescription": "steaming is important", "lab_test_prescription": "{FBC:noraml,FBS:high}", "updated_by": "kamal"}]}
+
+
+
+{"result": [
+  {"name": "", "age": "", "sickness_details": "", "drug_prescription": "day and night", "lab_test_prescription": "good", "updated_by": "dasith"},
+  {"name": "patient1", "age": "45", "sickness_details": "heart problem", "drug_prescription": "idk", "lab_test_prescription": "okay", "updated_by": "dasith"},
+  {"name": "patient2", "age": "63", "sickness_details": "", "drug_prescription": "", "lab_test_prescription": "", "updated_by": "nurse"},
+  {"name": "patient3", "age": "46", "sickness_details": "", "drug_prescription": "", "lab_test_prescription": "", "updated_by": "nurse"},
+  {"name": "patient4", "age": "56", "sickness_details": "not covid", "drug_prescription": "", "lab_test_prescription": "pass", "updated_by": "nurse"},
+  {"name": "patient5", "age": "49", "sickness_details": "", "drug_prescription": "", "lab_test_prescription": "", "updated_by": "nurse"},
+  {"name": "patient6", "age": "45", "sickness_details": "not covid-19", "drug_prescription": "steaming is important", "lab_test_prescription": "{FBC:noraml,FBS:high}", "updated_by": "kamal"},
+  {"name": "amal", "age": "56", "sickness_details": "", "drug_prescription": "", "lab_test_prescription": "", "updated_by": "dasith"}
+]}

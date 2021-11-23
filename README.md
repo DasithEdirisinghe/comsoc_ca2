@@ -25,7 +25,7 @@
 * Cannot read others data
 
 ## Sensitivity of Data
-* All the data records are important.But in terms of medical perspective the sensitivity of
+~~* All the data records are important.But in terms of medical perspective the sensitivity of
 drug prescription and details of the sickness details are more important. So doctor has the 
 privilege to modify and read those sensitive data.  
 
@@ -34,7 +34,7 @@ modification rights of lab test data has to given to the lab assistance as well.
 lab assistant and the doctor has the privilege.
 * For modification of the personal data, nurse and the doctor has the access. Patient him self has no access to
 modify his/him data. 
-* Patient can see their record. But cannot modify. Even patients cannot see others data.
+* Patient can see their record. But cannot modify. Even patients cannot see others data.~~
 
 ### Workflow
 #### Register
